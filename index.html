@@ -1531,10 +1531,29 @@
         <div class="subtitle">Digital Creator & Developer</div>
         
         <!-- Поиск Google -->
+        <!-- Замените текущий поисковый блок на этот код -->
         <div class="search-container">
-            <script async src="https://cse.google.com/cse.js?cx=ВАШ_ID"></script>
-            <div class="gcse-search" data-as_oq="русский"></div>
+            <div class="search-container-inner" style="height: 70px;">
+                <div class="grid"></div>
+                <div class="glow"></div>
+                <div class="darkBorderBg"></div>
+                <div class="white"></div>
+                <div class="border"></div>
+                
+                <div class="search-main">
+                    <div class="gcse-searchbox-only" data-as_oq="русский"></div>
+                    <div class="search-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Результаты поиска будут появляться здесь -->
+            <div class="gcse-searchresults-only"></div>
         </div>
+
+        <!-- Подключение скрипта Google -->
+        <script async src="https://cse.google.com/cse.js?cx=42115405ad1064507"></script>
         
         <!-- Loading bar -->
         <div class="loader">
