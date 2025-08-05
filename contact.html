@@ -427,13 +427,93 @@
     <script>
         // Инициализация частиц
         particlesJS('particles-js', {
-            /* конфигурация частиц из index.html */
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#08f7fe", "#fe53bb", "#09fbd3", "#7c4dff"]
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                    "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#08f7fe",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
         });
 
         // Переключение темы
         const themeSwitch = document.getElementById('input');
         const body = document.body;
-        
+    
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme) {
             body.classList.add(currentTheme);
@@ -441,7 +521,7 @@
                 themeSwitch.checked = true;
             }
         }
-        
+    
         themeSwitch.addEventListener('change', function() {
             if (this.checked) {
                 body.classList.add('light-theme');
@@ -468,12 +548,12 @@
 
         feedbackForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+        
             // Показываем индикатор загрузки
             btnText.style.display = 'none';
             loadingDots.style.display = 'inline';
             submitBtn.disabled = true;
-            
+        
             // Формируем сообщение для Telegram
             const formData = new FormData(this);
             const message = 📩 <b>Новое сообщение с сайта</b>\n\n +
@@ -481,20 +561,23 @@
                            📧 <b>Email:</b> ${formData.get('email')}\n +
                            📌 <b>Тема:</b> ${formData.get('subject')}\n\n +
                            💬 <b>Сообщение:</b>\n${formData.get('message')};
-            
+        
             try {
-                const response = await fetch(https://api.telegram.org/bot7679389504:AAE_Yxk-mcLSX8s9ZIjUikBYAQKnuaywKHY/sendMessage, {
+                const tk = '7679389504:AAE_Yxk-mcLSX8s9ZIjUikBYAQKnuaywKHY';
+                const CHAT_ID = '5290305623';
+            
+                const response = await fetch(https://api.telegram.org/bot${tk}/sendMessage, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        chat_id: '5290305623',
+                        chat_id: CHAT_ID,
                         text: message,
                         parse_mode: 'HTML'
                     })
                 });
-                
+            
                 const result = await response.json();
-                
+            
                 if (response.ok && result.ok) {
                     showSuccess();
                     feedbackForm.reset();
@@ -539,7 +622,7 @@
                 animation: blink 1.4s infinite;
             }
             .loading-dots span:nth-child(2) {
-                animation-delay: 0.2s;
+            animation-delay: 0.2s;
             }
             .loading-dots span:nth-child(3) {
                 animation-delay: 0.4s;
